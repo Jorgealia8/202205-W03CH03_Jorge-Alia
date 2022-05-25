@@ -1,7 +1,9 @@
-import { Film } from '../components/Pendientes.js';
+import { Film } from '../components/Noview.js';
+import { View } from '../components/view.js';
 
 function app() {
     new Film('.series-list');
+    new View('.series-list--watched');
 }
 
 (() => {
