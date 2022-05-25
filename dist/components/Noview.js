@@ -16,9 +16,7 @@ export class Film extends Component {
                   src="${item.poster}"
                   alt="${item.name} poster"/>
                 <h4 class="serie__title">${item.name}</h4>
-                <p class="serie__info">${item.creator} ${item.year}</p>`;
-        });
-        html += `
+                <p class="serie__info">${item.creator} ${item.year}</p>
                 <ul class="score">
                   <li class="score__star">
                     <i class="icon--score fas fa-star" title="1/5"></i>
@@ -37,8 +35,8 @@ export class Film extends Component {
                   </li>
                 </ul>
                 <i class="fas fa-times-circle icon--delete"></i>
-              </li>
-        `;
+              </li>`;
+        });
         return html;
     }
 }

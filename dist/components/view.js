@@ -19,9 +19,7 @@ export class View extends Component {
                     alt="${item.name} poster"
                 />
                 <h4 class="serie__title">${item.name}</h4>
-                <p class="serie__info"${item.creator} ${item.year}</p>`;
-        });
-        html += `
+                <p class="serie__info"${item.creator} ${item.year}</p>
                 <ul class="score">
                     <li class="score__star">
                         <i
@@ -56,6 +54,7 @@ export class View extends Component {
                 </ul>
                 <i class="fas fa-times-circle icon--delete"></i>
             </li>`;
+        });
         return html;
     }
 }
