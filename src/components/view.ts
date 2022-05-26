@@ -1,15 +1,15 @@
 import { Component } from './component.js';
 import { series } from './data.js';
 export class View extends Component {
-    constructor(selector: string) {
+    constructor(public selector: string) {
         super();
         this.template = this.createTemplate();
         this.render(selector);
+        this.manageComponent();
     }
     createTemplate() {
         let html = '';
         let view = [];
-
         view = series.filter((item) => item.watched !== false);
 
         view.forEach((item) => {
@@ -54,9 +54,21 @@ export class View extends Component {
                         ></i>
                     </li>
                 </ul>
-                <i class="fas fa-times-circle icon--delete"></i>
+                <i class="fas fa-times-circle icon--delete delete_view" id="${item.id}"></i>
             </li>`;
         });
         return html;
+    }
+    private manageComponent() {
+        document
+            .querySelectorAll('.delete_view')
+            .forEach((item) =>
+                item.addEventListener('click', this.handlerButton.bind(this))
+            );
+    }
+    protected handlerButton(ev: Event) {
+        const deletedId = Number((<HTMLElement>ev.target).id);
+        console.log('click', deletedId);
+        series.filter((item) => item.id !== deletedId);
     }
 }

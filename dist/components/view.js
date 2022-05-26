@@ -1,10 +1,13 @@
 import { Component } from './component.js';
 import { series } from './data.js';
 export class View extends Component {
+    selector;
     constructor(selector) {
         super();
+        this.selector = selector;
         this.template = this.createTemplate();
         this.render(selector);
+        this.manageComponent();
     }
     createTemplate() {
         let html = '';
@@ -52,9 +55,19 @@ export class View extends Component {
                         ></i>
                     </li>
                 </ul>
-                <i class="fas fa-times-circle icon--delete"></i>
+                <i class="fas fa-times-circle icon--delete delete_view" id="${item.id}"></i>
             </li>`;
         });
         return html;
+    }
+    manageComponent() {
+        document
+            .querySelectorAll('.delete_view')
+            .forEach((item) => item.addEventListener('click', this.handlerButton.bind(this)));
+    }
+    handlerButton(ev) {
+        const deletedId = Number(ev.target.id);
+        console.log('click', deletedId);
+        series.filter((item) => item.id !== deletedId);
     }
 }

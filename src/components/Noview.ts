@@ -1,10 +1,11 @@
 import { Component } from './component.js';
 import { series } from './data.js';
-export class Film extends Component {
-    constructor(selector: string) {
+export class Noview extends Component {
+    constructor(public selector: string) {
         super();
         this.template = this.createTemplate();
         this.render(selector);
+        this.updateComponent();
     }
     createTemplate() {
         let html = '';
@@ -36,9 +37,30 @@ export class Film extends Component {
                     <i class="icon--score fas fa-star" title="5/5"></i>
                   </li>
                 </ul>
-                <i class="fas fa-times-circle icon--delete"></i>
+                <i class="fas fa-times-circle icon--delete delete-Noview" id="${item.id}"></i>
               </li>`;
         });
         return html;
+    }
+    private manageComponent() {
+        document
+            .querySelectorAll('.delete-Noview')
+            .forEach((item) =>
+                item.addEventListener('click', this.handlerButton.bind(this))
+            );
+    }
+    private updateComponent() {
+        this.template = this.createTemplate();
+        this.render(this.selector);
+        this.manageComponent();
+    }
+    private handlerButton(ev: Event) {
+        const deletedId = Number((<HTMLElement>ev.target).id);
+        console.log('click', deletedId);
+
+        series.filter((item) => item.id !== deletedId);
+        this.template = this.createTemplate();
+        this.render(this.selector);
+        this.manageComponent();
     }
 }
